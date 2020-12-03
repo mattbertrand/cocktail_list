@@ -12,7 +12,6 @@ class Api
             data = JSON.parse(response.body)
 
             data["drinks"].each do |cocktail_data|
-                # binding.pry
                 Cocktail.new(cocktail_data)
             end
     end
