@@ -1,9 +1,11 @@
-class CocktailList::CLI
+class CLI
 
     def call
         puts "Today we are going to discover 25 cocktails starting with the letter 'A'."
         puts "loading..."
+        sleep(3)
         puts "Are you ready to discover the list?"
+        sleep(1)
         Api.load_data
         main_menu_options
     end
@@ -17,20 +19,21 @@ class CocktailList::CLI
     def main_menu
         input = get_input
 
-        if input == "go"
+        if input.downcase == "go"
             list_cocktails
             main_menu_options
-        elsif input == "exit"
+        elsif input.downcase == "exit"
             puts "Thank you for visiting us, cheers!"
             exit
         else
             invalid_choice
             main_menu_options
         end
+        puts "Goodbye"
     end
 
     def invalid_choice
-        puts "Invalid choice. Please try again'"
+        puts "Invalid choice. Please try again'".red
     end
 
     def get_input
@@ -61,7 +64,7 @@ class CocktailList::CLI
             cocktail = Cocktail.all[index]
             print cocktail_recipe(cocktail)
             select_again_or_exit
-        elsif input == "exit"
+        elsif input.downcase == "exit"
             puts "Thank you for visiting us, cheers!"
             exit
         else
@@ -73,11 +76,10 @@ class CocktailList::CLI
     def cocktail_recipe(cocktail)
         puts "          -----------------           "
         puts "Cocktail Name: #{cocktail.name}"
-        puts "Cocktail Ingredient: "
-        " #{cocktail.ingredients.each do |ingredients|
-        puts "#{ingredients}"
-    end
-        }"
+        puts "Cocktail Ingredients: " 
+            "#{cocktail.ingredients.each do |ingredient|
+            puts "#{ingredient}"
+        end}"
         puts "Cocktail Glass: #{cocktail.glass}"
         puts "Cocktail Recipe: #{cocktail.recipe}"
         puts "          -----------------           "
@@ -94,7 +96,7 @@ class CocktailList::CLI
             main_menu_options
         elsif input == '2'
             list_cocktails
-        elsif input == 'exit'
+        elsif input.downcase == 'exit'
             puts "Enjoy your cocktail, see you soon for more cocktail recipes!"
             puts ""
             puts ""

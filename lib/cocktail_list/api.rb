@@ -1,5 +1,3 @@
-require 'json'
-
 class Api
     
     def self.load_data

@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "cocktail_list"
+require "environment"
 
-
-CocktailList::CLI.new.call
+CLI.new.call
